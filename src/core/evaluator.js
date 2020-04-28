@@ -1777,7 +1777,9 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
           };
         }
         textContentItem.fontName = font.loadedName;
-
+        textContentItem['italic'] = font.italic;
+        textContentItem['bold'] = font.bold;
+        
         // 9.4.4 Text Space Details
         var tsm = [
           textState.fontSize * textState.textHScale,

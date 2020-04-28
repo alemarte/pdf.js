@@ -101,6 +101,13 @@ var renderTextLayer = (function renderTextLayerClosure() {
     textDiv.style.fontSize = `${fontHeight}px`;
     textDiv.style.fontFamily = style.fontFamily;
 
+    if (geom.italic) {
+      textDiv.className += " italic";
+    }
+    if (geom.bold) {
+      textDiv.className += " bold";
+    }
+    
     textDiv.textContent = geom.str;
     // `fontName` is only used by the FontInspector, and we only use `dataset`
     // here to make the font name available in the debugger.
@@ -641,7 +648,7 @@ var renderTextLayer = (function renderTextLayerClosure() {
             pump();
           }, capability.reject);
         };
-
+        
         this._reader = this._textContentStream.getReader();
         pump();
       } else {
