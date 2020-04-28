@@ -552,13 +552,13 @@ class MessageHandler {
   async _deleteStreamController(streamId) {
     // Delete the `streamController` only when the start, pull, and cancel
     // capabilities have settled, to prevent `TypeError`s.
-    await Promise.allSettled(
+    await Promise.all(
       [
         this.streamControllers[streamId].startCall,
         this.streamControllers[streamId].pullCall,
         this.streamControllers[streamId].cancelCall,
       ].map(function (capability) {
-        return capability && capability.promise;
+        return capability && Promise.resolve(capability.promise)["catch"](function () {});
       })
     );
     delete this.streamControllers[streamId];
